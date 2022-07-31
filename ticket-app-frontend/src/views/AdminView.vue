@@ -49,10 +49,10 @@
                                             <td v-if="ticket.done === true" class="text-success">Completado</td>
                                             <td class="text-danger" v-else>Pendiente</td>
                                             <td>
-                                                <button v-if="ticket.done === true" class="btn-sm btn-success"
-                                                    @click="limpiar">Limpiar</button>
-                                                <button v-else-if="store.res === false" class="btn-sm btn-secondary"
-                                                    disabled>Responder</button>
+                                                <!-- <button v-if="ticket.done === true" class="btn-sm btn-success"
+                                                    @click="limpiar">Limpiar</button> -->
+                                                <button v-if="store.res === false || ticket.done === true"
+                                                    class="btn-sm btn-secondary" disabled>Responder</button>
                                                 <button v-else class="btn-sm btn-primary"
                                                     @click="responder(tickets, tIndex)">Responder</button>
                                             </td>
@@ -71,7 +71,7 @@
         <div class="row mb-4 justify-content-start">
             <div class="col-md-4 d-grid gap-2 col-6 mx-auto">
 
-                <input type="submit" value="Enviar" class="btn btn-primary">
+                <!-- <input type="submit" value="Enviar" class="btn btn-primary"> -->
                 <input type="submit" value="Salir" class="btn btn-danger">
             </div>
 
@@ -106,14 +106,24 @@ const getTickets = async () => {
 }
 
 const responder = async (ticket, id) => {
-    let res = {
+    // let res = [{
+    //     "show": false,
+    //     "done": true,
+    //     "respuesta": [{
+    //         "texto": store.respuesta,
+    //         "autor": `${store.nombre} ${store.apellido}`
+    //     }]
+    // }]
+
+    let res = [{
         "texto": store.respuesta,
         "autor": `${store.nombre} ${store.apellido}`
-    }
+    }]
     let resUrl = `${store.respondTickets}${ticket._id}/${id}`
     const query = await useFetch(resUrl, 'PUT', res)
 
-    store.showTicket = false
+    store.respuesta = ''
+
 }
 
 const limpiar = ticket => {

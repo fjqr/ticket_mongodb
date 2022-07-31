@@ -102,14 +102,14 @@ router.get('/getaticket/:id/:ticketid', async (req, res) => {
 
 router.delete('/deleteticket/:id', async (req, res) => {
     try {
-        // const ticket = await Crud.findByIdAndDelete(res.params.id)
-        // if (!ticket) return res.status(404).json({ message: "Ticket no encontrado" })
-        // return res.json(ticket)
-        const ticket = await Crud.findById(res.params.id, (err, ticket) => {
-            if (!error) {
-                Crud.ticket.id()
-            }
-        })
+        const ticket = await Crud.findByIdAndDelete(res.params.id)
+        if (!ticket) return res.status(404).json({ message: "Ticket no encontrado" })
+        return res.json(ticket)
+        // ticket = await Crud.findById(res.params.id, (err, ticket) => {
+        //     if (!error) {
+        //         Crud.ticket.id()
+        //     }
+        // })
 
     } catch (error) {
         return res.status(500).send(error)
