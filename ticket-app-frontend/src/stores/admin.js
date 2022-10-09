@@ -14,7 +14,8 @@ export const useAdminStore = defineStore({
     getUsersTickets: 'http://localhost:3000/users',
     respondTickets: 'http://localhost:3000/responder/',
     res: false,
-    showTicket: true
+    showTicket: true,
+    open: null
   }),
   getters: {},
   actions: {}
